@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Homepage</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="logo.png" alt="Shop Logo" class="logo"> 
+            <h1>Welcome to ta LU shop</h1>
+            
+            <!-- Navigation Links -->
+            <nav class="button-group">
+                <ul>
+                    <li><button onclick="goToShop()">Go to Shop</button></li>
+                    <li><button onclick="goToContact()">Contact Us</button></li>
+                    <li><button onclick="logout()">Login as Admin</button></li>
+                </ul>
+            </nav>  
+        </div>
+    </header>
+    
+    <script>
+        // Function for navigating to the shop
+        function goToShop() {
+            window.location.href = 'shop.html';  // Replace with your actual shop page link
+        }
+
+        // Function for navigating to the contact page
+        function goToContact() {
+            window.location.href = 'contact.html';  // Replace with your actual contact page link
+        }
+
+        // Function for logging out the user
+        function logout() {
+            localStorage.removeItem('userRole');  // Clear user role from localStorage
+            window.location.href = 'login.html';  // Redirect back to login page
+        }
+    </script>
+</body>
+</html>
