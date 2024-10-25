@@ -9,7 +9,7 @@
 <body>
     <header>
         <div class="container">
-            <img src="logo.png" alt="Shop Logo" class="logo"> 
+            <img src="logs.png" alt="Shop Logo" class="logo"> 
             <h1>Welcome to ta LU shop</h1>
             
             <!-- Navigation Links -->
@@ -21,8 +21,53 @@
                 </ul>
             </nav>  
         </div>
+
+        <!-- Search bar -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search products...">
+            <button onclick="searchProducts()">Search</button>
+        </div>
     </header>
-    
+
+    <!-- Product showcase section -->
+    <section class="product-showcase">
+        <h2>Featured Products</h2>
+        <div class="products">
+            <!-- Product 1 -->
+            <div class="product">
+                <img src="https://econtent.o2.co.uk/o/econtent/media/get/53e70931-314f-49a1-9d2a-fb425a845b8b " alt="Product 1" class="product-img">
+                <h3>IPhone 19 ultra max</h3>
+                <p>Price: $49.99</p>
+                <p class="sale">On Sale: $39.99</p>
+                <button class="shop-now" onclick="goToShop()">Shop Now</button>
+            </div>
+            <!-- Product 2 -->
+            <div class="product">
+                <img src="https://img.ws.mms.shopee.ph/ph-11134207-7r98t-llw133odolptf2" alt="Product 2" class="product-img">
+                <h3>Oxygn Shirt</h3>
+                <p>Price: $59.99</p>
+                <p class="sale">On Sale: $49.99</p>
+                <button class="shop-now" onclick="goToShop()">Shop Now</button>
+            </div>
+            <!-- Product 3 -->
+            <div class="product">
+                <img src="key.png" alt="Product 3" class="product-img">
+                <h3>Inplay keyboard</h3>
+                <p>Price: $29.99</p>
+                <p class="sale">On Sale: $19.99</p>
+                <button class="shop-now" onclick="goToShop()">Shop Now</button>
+            </div>
+            <!-- Product 4-->
+            <div class="product">
+                <img src="lap.png" alt="Product 3" class="product-img">
+                <h3>ASUS laptop</h3>
+                <p>Price: $29.99</p>
+                <p class="sale">On Sale: $19.99</p>
+                <button class="shop-now" onclick="goToShop()">Shop Now</button>
+            </div>
+        </div>
+    </section>
+
     <script>
         // Function for navigating to the shop
         function goToShop() {
@@ -38,6 +83,35 @@
         function logout() {
             localStorage.removeItem('userRole');  // Clear user role from localStorage
             window.location.href = 'login.html';  // Redirect back to login page
+        }
+
+        // Function to search products using an API
+        function searchProducts() {
+            const query = document.getElementById('searchInput').value;
+            
+            // Fetch products from an API (replace with your actual API endpoint)
+            fetch(`https://fakestoreapi.com/products?q=${query}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Display the search results in the product section
+                    const productContainer = document.querySelector('.products');
+                    productContainer.innerHTML = '';  // Clear the current product list
+
+                    data.forEach(product => {
+                        const productElement = document.createElement('div');
+                        productElement.classList.add('product');
+                        productElement.innerHTML = `
+                            <img src="${product.image}" alt="${product.title}" class="product-img">
+                            <h3>${product.title}</h3>
+                            <p>Price: $${product.price}</p>
+                            <button class="shop-now" onclick="goToShop()">Shop Now</button>
+                        `;
+                        productContainer.appendChild(productElement);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching products:', error);
+                });
         }
     </script>
 </body>
