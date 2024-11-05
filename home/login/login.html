@@ -5,14 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <link rel="stylesheet" href="login.css">
-
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
 </head>
 <body>
     <div class="login-container">
-        <h1>Login</h1>
+        <h1>Login as Admin</h1>
         <form id="loginForm">
             <label for="email">Email:</label>
             <input type="email" id="email" required><br><br>
@@ -21,59 +17,30 @@
             <input type="password" id="password" required><br><br>
 
             <button type="submit">Login</button>
+            <a href="home.html" style="text-decoration: none; color: blue;">Go Back Home</a>
+
         </form>
         <p id="loginMessage"></p>
     </div>
 
-    <!-- Navigation Buttons -->
-    <div class="button-group" style="text-align: center; margin-top: 20px;">
-        <button onclick="goToShop()">back to home</button>
-    </div>
 
     <script>
-        // Your Firebase configuration
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
-
-        // Initialize Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-
-        // Handle form submission for login
+        // Handle form submission (dummy behavior for now)
         document.getElementById("loginForm").addEventListener("submit", function(event) {
             event.preventDefault();
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
             const loginMessage = document.getElementById("loginMessage");
 
-            // Sign in with Firebase Authentication
-            firebase.auth().signInWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    loginMessage.textContent = "Login successful!";
-                    // Redirect based on user's role or page after login
-                    window.location.href = "user-dashboard.html"; // Redirect to a user-specific page
-                })
-                .catch((error) => {
-                    loginMessage.textContent = `Error: ${error.message}`;
-                });
+            // Placeholder for actual login logic
+            if (email && password) {
+                loginMessage.textContent = "Login successful!";
+                // Redirect to user dashboard (or any page after successful login)
+                window.location.href = "user-dashboard.html"; // Replace with actual redirect link
+            } else {
+                loginMessage.textContent = "Please enter valid credentials.";
+            }
         });
-
-        
-        document.getElementById("shopNowBtn").addEventListener("click", function() {
-            window.location.href = "home.html";
-        });
-
-        // Function for navigating to the shop
-        function goToShop() {
-            window.location.href = 'home.html';  // Replace with your actual shop page link
-        }
-
-        
     </script>
 </body>
 </html>
